@@ -6,9 +6,14 @@ import { UserService } from '../../user.service';
   templateUrl: './user.component.html',
   styleUrl: './user.component.css'
 })
+
+
 export class UserComponent {
 
   constructor(private userService: UserService) { }
+
+
+
 
   user = {
     username: '',
@@ -48,6 +53,7 @@ export class UserComponent {
       this.userService.deleteUser(id).subscribe(
         response => {
           console.log('Utilisateur supprimé avec succès', response);
+          this.isUpdating=false;
           this.ngOnInit()
 
         },
@@ -71,6 +77,15 @@ export class UserComponent {
       }
     )
   }
+
+
+  sortUsersByDate(): any[] {
+    const sortedUsers = Object.values(this.usersDisplay).sort((a: any, b: any) => {
+      return new Date(b.created_At).getTime() - new Date(a.created_At).getTime();
+    });
+    return sortedUsers;
+  }
+
 }
 
 

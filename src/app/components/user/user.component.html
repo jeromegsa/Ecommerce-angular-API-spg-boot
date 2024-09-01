@@ -50,7 +50,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let user of usersDisplay; let i = index">
+        <tr *ngFor="let user of sortUsersByDate(); let i = index">
           <th scope="row">{{ user.id }}</th>
           <td><span *ngIf="!isUpdating">{{ user.username }}</span>
             <input type="text" [(ngModel)]=user.username *ngIf="isUpdating">
